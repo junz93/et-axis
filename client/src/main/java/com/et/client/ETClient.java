@@ -41,49 +41,49 @@ public class ETClient {
      *
      * @param args
      */
-    public static void main1(String args[]) {
-        org.apache.axis2.context.ConfigurationContext configurationContext = null;
-        try {
-            EndpointReference endPointReference = new EndpointReference("https://webservice.exacttarget.com/Service.asmx");
-            configurationContext = ConfigurationContextFactory.createConfigurationContextFromFileSystem(PropertiesUtil.getInstance().getProperty("repositoryFolder"), PropertiesUtil.getInstance().getProperty("axis2File"));
-            PartnerAPIStub stub = new PartnerAPIStub(configurationContext, "https://webservice.exacttarget.com/Service.asmx");
-            ServiceClient serviceClient = stub._getServiceClient();
-            Options options = new Options();
-            options.setTo(endPointReference);
-            serviceClient.setOptions(options);
-            RetrieveRequestMsgDocument retrieveRequestMsgDocument = com.exacttarget.wsdl.partnerapi.RetrieveRequestMsgDocument.Factory.newInstance();
-            RetrieveRequest rreq = com.exacttarget.wsdl.partnerapi.RetrieveRequest.Factory.newInstance();
-            rreq.setObjectType("Email");
-            String rreqProperties[] = {
-                    "ID", "Name", "Subject", "HTMLBody"
-            };
-            rreq.setPropertiesArray(rreqProperties);
-            SimpleFilterPart sfp = com.exacttarget.wsdl.partnerapi.SimpleFilterPart.Factory.newInstance();
-            sfp.setProperty("Name");
-            sfp.setSimpleOperator(SimpleOperators.EQUALS);
-            String sfpValues[] = {
-                    "Test"
-            };
-            sfp.setValueArray(sfpValues);
-            rreq.setFilter(sfp);
-            com.exacttarget.wsdl.partnerapi.RetrieveRequestMsgDocument.RetrieveRequestMsg retrieveRequestMsg = retrieveRequestMsgDocument.addNewRetrieveRequestMsg();
-            retrieveRequestMsg.setRetrieveRequest(rreq);
-            RetrieveResponseMsgDocument retrieveResponseMsgDocument = stub.retrieve(retrieveRequestMsgDocument);
-            com.exacttarget.wsdl.partnerapi.RetrieveResponseMsgDocument.RetrieveResponseMsg retrieveResponseMsg = retrieveResponseMsgDocument.getRetrieveResponseMsg();
-            System.out.println((new StringBuilder()).append("Response ::: ").append(retrieveResponseMsg.getOverallStatus()).toString());
-            APIObject apiObject = retrieveResponseMsg.getResultsArray(0);
-            Email email = (Email) apiObject;
-            System.out.println("Subject ::: " + email.getHTMLBody());
-            System.out.println((new StringBuilder()).append("Email  Id  ::: ").append(apiObject.getObjectID()).toString());
-
-        }
-        catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main1(String args[]) {
+//        org.apache.axis2.context.ConfigurationContext configurationContext = null;
+//        try {
+//            EndpointReference endPointReference = new EndpointReference("https://webservice.exacttarget.com/Service.asmx");
+//            configurationContext = ConfigurationContextFactory.createConfigurationContextFromFileSystem(PropertiesUtil.getInstance().getProperty("repositoryFolder"), PropertiesUtil.getInstance().getProperty("axis2File"));
+//            PartnerAPIStub stub = new PartnerAPIStub(configurationContext, "https://webservice.exacttarget.com/Service.asmx");
+//            ServiceClient serviceClient = stub._getServiceClient();
+//            Options options = new Options();
+//            options.setTo(endPointReference);
+//            serviceClient.setOptions(options);
+//            RetrieveRequestMsgDocument retrieveRequestMsgDocument = com.exacttarget.wsdl.partnerapi.RetrieveRequestMsgDocument.Factory.newInstance();
+//            RetrieveRequest rreq = com.exacttarget.wsdl.partnerapi.RetrieveRequest.Factory.newInstance();
+//            rreq.setObjectType("Email");
+//            String rreqProperties[] = {
+//                    "ID", "Name", "Subject", "HTMLBody"
+//            };
+//            rreq.setPropertiesArray(rreqProperties);
+//            SimpleFilterPart sfp = com.exacttarget.wsdl.partnerapi.SimpleFilterPart.Factory.newInstance();
+//            sfp.setProperty("Name");
+//            sfp.setSimpleOperator(SimpleOperators.EQUALS);
+//            String sfpValues[] = {
+//                    "Test"
+//            };
+//            sfp.setValueArray(sfpValues);
+//            rreq.setFilter(sfp);
+//            com.exacttarget.wsdl.partnerapi.RetrieveRequestMsgDocument.RetrieveRequestMsg retrieveRequestMsg = retrieveRequestMsgDocument.addNewRetrieveRequestMsg();
+//            retrieveRequestMsg.setRetrieveRequest(rreq);
+//            RetrieveResponseMsgDocument retrieveResponseMsgDocument = stub.retrieve(retrieveRequestMsgDocument);
+//            com.exacttarget.wsdl.partnerapi.RetrieveResponseMsgDocument.RetrieveResponseMsg retrieveResponseMsg = retrieveResponseMsgDocument.getRetrieveResponseMsg();
+//            System.out.println((new StringBuilder()).append("Response ::: ").append(retrieveResponseMsg.getOverallStatus()).toString());
+//            APIObject apiObject = retrieveResponseMsg.getResultsArray(0);
+//            Email email = (Email) apiObject;
+//            System.out.println("Subject ::: " + email.getHTMLBody());
+//            System.out.println((new StringBuilder()).append("Email  Id  ::: ").append(apiObject.getObjectID()).toString());
+//
+//        }
+//        catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     //Create Call
     public static void main(String args[]) {
@@ -91,7 +91,8 @@ public class ETClient {
         try {
 
             EndpointReference endPointReference = new EndpointReference("https://webservice.exacttarget.com/Service.asmx");
-            configurationContext = ConfigurationContextFactory.createConfigurationContextFromFileSystem(PropertiesUtil.getInstance().getProperty("repositoryFolder"), PropertiesUtil.getInstance().getProperty("axis2File"));
+            System.out.println(ETClient.class.getResource("/axis2client.xml").getPath());
+            configurationContext = ConfigurationContextFactory.createConfigurationContextFromFileSystem("D:/repo/", ETClient.class.getResource("/axis2client.xml").getPath().substring(1));
             PartnerAPIStub stub = new PartnerAPIStub(configurationContext, "https://webservice.exacttarget.com/Service.asmx");
             ServiceClient serviceClient = stub._getServiceClient();
             Options options = new Options();
