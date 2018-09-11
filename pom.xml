@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>my.exacttarget</groupId>
+    <artifactId>axis-soap</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>wsdl</module>
+        <module>client</module>
+    </modules>
+
+    <properties>
+        <axis.version>1.6.0</axis.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-transport-tcp</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-jaxws</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-json</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-kernel</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-xmlbeans</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-soapmonitor-servlet</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rampart</groupId>
+                <artifactId>rampart-core</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rampart</groupId>
+                <artifactId>rampart-policy</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rampart</groupId>
+                <artifactId>rampart-trust</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
